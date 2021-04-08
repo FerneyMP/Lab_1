@@ -3,13 +3,15 @@
 using namespace std;
 
 int inicio, ejercicio;
-int A,B,N,F,letra,suma=0, c=0,w,i,j, horas, minutos, segundos, contador=1, acumulador =1, acumulador_2 = 1, filas,k=0;       // ----------------> VARIABLES
+long int A,B,N,F,letra, c=0,w,i,j, horas, minutos, segundos, acumulador =1, filas;
 float  pi=3.1416, D,E;
 char C, H, espacios, estrellas;
 bool band2=true, band=true;
-long long int mul,a,b,e,d,f,sum;
+long long int mul,a,b,d,e,f,k,sum,suma=0, cont=1,contador=1;
 unsigned short dia, mes;
 short n0;
+long long unsigned int cont1=0,acum=1, acumulador_2 = 1,s=0,z1,N1;
+
 
 //Espacio para definir las variables.
 
@@ -26,6 +28,7 @@ int main()
         case 1:
             //Programa que pida dos números A y B e imprima el residuo de la division A/B
             //El signo depende de la implementacion, a=bq+r
+
             cout<<"Ingrese un numero A: "; cin >> A;
             cout<<"Ingrese un numero B: "; cin >>B;
             if (B==0)cout<<"Indefinido"<< endl;
@@ -42,6 +45,7 @@ int main()
 
         case 3:
             //Programa que pida dos números A y B e imprima en pantalla el mayor
+
             cout<<"Ingrese un numero A: "; cin >> A;
             cout<<"Ingrese un numero B: "; cin >>B;
             if(A>B) cout << "El numero ingresado: " << A << " es el mayor " << endl;
@@ -62,12 +66,20 @@ int main()
 
         case 5:
             //Programa que pida dos números A y B e imprima en pantalla la división A/B con redondeo
+
             cout<<"Ingrese un numero A: "; cin >> A;
             cout<<"Ingrese un numero B: "; cin >>B;
             if (B==0)cout<<"Indefinido"<< endl;
             else{
-                if(2*(A%B)>=B) cout<<A<<'/'<<B<<" = "<<A/B+1<<endl;
-                else cout<<A<<'/'<<B<<" = "<<A/B<<endl;
+                if ((A>0&&B>0) || (A<0&&B<0 )){
+                    if(2*(A%B)>=B) cout<<A<<'/'<<B<<" = "<<A/B+1<<endl;
+                    else cout<<A<<'/'<<B<<" = "<<A/B<<endl;
+                }
+                else{
+                    N=(-1)*(A%B);
+                    if(2*N>=B) cout<<A<<'/'<<B<<" = - "<<(-1)*(A/B)+1<<endl;
+                    else cout<<A<<'/'<<B<<" = "<<A/B<<endl;
+                }
             }
             break;
 
@@ -86,12 +98,13 @@ int main()
         case 7:
             //Programa que pida un número e imprima en pantalla la suma de todos los números entre 0 y N (incluyéndose el mismo)
             //Tambien se puede usar la formula matematica ( (n)*(n+1) )/2
-            cout<<"Ingrese un numero A: "; cin >> A;
-            if(A>=0){
-                for(;contador<=A;contador++){
-                    suma=contador+suma;
+
+            cout<<"Ingrese un numero: "; cin >> a;
+            if(a>=0){
+                for(;cont<=a;cont++){
+                    suma=cont+suma;
                 }
-                cout <<"La sumatoria desde 0 hasta "<< A <<" es: " << suma <<endl;
+                cout <<"La sumatoria desde 0 hasta "<< a <<" es: " << suma <<endl;
             }
             else cout<<"Ingrese numeros positivos"<<endl;
             break;
@@ -108,20 +121,20 @@ int main()
         case 9:
             //Programa que pida un número N e imprima el perímetro y área de un círculo con radio N
             //Nota: use 3.1416 como una aproximación de pi.
-            A=0;
+
             do{
                 cout << "Ingrese un numero: "; cin >> N;
                 if (N<0){
                      cout << "Ingrese numero positivo "<< endl;
                 }
                 else{
-                    A=1;
-                    D=2*pi*N;
-                    E=pi*(N*N);
-                    cout << " El perimetro del circulo es: " << D<< endl;
-                    cout << " El area del circulo es: " << E<< endl;
+                    band=false;
+                    d=2*pi*N;
+                    e=pi*(N*N);
+                    cout << " El perimetro del circulo es: " << d<< endl;
+                    cout << " El area del circulo es: " << e<< endl;
                 }
-            }while(A==1);
+            }while(band);
             break;
 
         case 10:
@@ -138,10 +151,11 @@ int main()
 
         case 11:
             //Programa que pida un número N e imprima en pantalla su tabla de multiplicar hasta 10xN.
+
             cout << "Ingrese un numero N: "; cin >> N;
-            for (;contador<=10;contador++){
-                A = (contador*N);
-                cout << contador << " X " << N << " = " << A << endl;
+            for (;cont<=10;cont++){
+                a = (cont*N);
+                cout << cont << " X " << N << " = " << a<< endl;
             }
             break;
 
@@ -158,20 +172,28 @@ int main()
             break;
 
         case 13:
-            //NEGATIVOS
             //Programa que pida un número N e imprima todos los divisores de N
+
             cout << "Ingrese un numero N: "; cin >> N;
             if (N>0){
                 cout << "Los divisores del numero son: " << endl;
-                while(contador<=N){
-                    if (N%contador==0){
-                            cout << contador << endl;
+                while(cont<=N){
+                    if (N%cont==0){
+                            cout << cont << endl;
                     }
-                    contador++;
+                    cont++;
                 }
             }
-            else if(N==0) cout <<"El cero tiene infinitos divisores"<< endl;
-            else cout << "Ingrese un numero positivo"<< endl;
+            else if (N<0){
+                cout << "Los divisores del numero son: " << endl;
+                while(cont<=(-1)*N){
+                    if (N%cont==0){
+                            cout << "-" << cont << endl;
+                    }
+                    cont++;
+                }
+            }
+            else cout <<"El cero tiene infinitos divisores"<< endl;
             break;
 
         case 14:
@@ -188,6 +210,7 @@ int main()
         case 15:
             //Programa que pida constantemente números hasta que se ingrese el número cero
             //Imprima en pantalla la suma de todos los números ingresados.
+
             do{
                 cout << "Ingrese un numero: "; cin >> N;
                 suma+=N;
@@ -212,17 +235,21 @@ int main()
         case 17:
             //Programa que pida constantemente números hasta que se ingrese el número cero
             //Imprima en pantalla el mayor
-            cout << "Ingrese un numero: "; cin >> A;
-            while(true){
-                cout << "Ingrese un numero: "; cin >> B;
-                if(B==0){
-                    break;
+
+            cout << "Ingrese un numero: "; cin >> a;
+            if (a==0)cout <<"El programa termina al ingresar el cero"<<endl;
+            else{
+                    while(true){ //evita que al ingresar negativos el cero sea el mayor
+                    cout << "Ingrese un numero: "; cin >> b;
+                    if(b==0){
+                        break;
+                    }
+                    if (b>a){
+                        a=b;
+                    }
                 }
-                if (B>A){
-                    A=B;
-                }
+                cout << "El numero mayor de los numeros ingresados es: " << a <<endl;
             }
-            cout << "El numero mayor de los numeros ingresados es: " << A <<endl;
             break;
 
         case 18:
@@ -241,12 +268,12 @@ int main()
 
         case 19:
             //Programa que pida un número N e imprima si es o no un número primo.
+
             cout << "Ingrese un numero: "; cin >> N;
             if (N>1){
-                while(contador!=N){
-                    contador+=1;
-                    cout<< contador<< endl;//
-                    if (N%contador==0){
+                while(cont!=N){
+                    cont+=1;
+                    if (N%cont==0){
                         c+=1;
                     }
                 }
@@ -257,6 +284,7 @@ int main()
                     cout << "El numero ingresado NO es primo"<< endl;
                 }
             }
+            else cout << "Los numeros primos son naturales mayores a 1"<< endl;
             break;
 
         case 20:
@@ -266,9 +294,9 @@ int main()
         case 21:
             //Programa que pida un carácter C
             //Si es una letra la debe convertir de mayúscula a minúscula y viceversa e imprimirla
-            cout<<"Ingrese un caracter: ";
-            cin >> C;
-            letra=C;
+
+            cout<<"Ingrese un caracter: "; cin >> C;
+            letra=C; //usar valores de la tabla ascii
             if ( letra>=65 && letra<=90){
                 H=letra+32;
                 cout << "Letra MAYUSCULA convertida a MINUSCULA: "<< H<< endl;
@@ -295,28 +323,29 @@ int main()
             break;
 
         case 23:
-            //CERO
             //Programa que pida dos números A y B e imprima en pantalla el mínimo común múltiplo entre los dos
+            //Si el producto de dos números lo dividimos por su máximo común divisor (MCD) dicho cociente es el mínimo común múltiplo.
+
             cout<<"Ingrese un numero A: "; cin >> A;
             cout<<"Ingrese un numero B: "; cin >>B;
-            a=A; b=B;
-            while ((contador<=a) && (contador<=b)){
-                if(a%contador==0){
-                     if(b%contador==0){
-                          if(contador>mul){ //mul=MCD
-                              mul=contador;
-                          }
-                     }
-                }
-                contador+=1;
+            if (A==0 || B==0){
+                 cout<<"El minimo comun multiplo es el numero mas pequeno diferente de cero que es multiplo de los numeros" << endl;
             }
-            cout <<mul;
-            cout<<"El minimo comun multiplo de "<<A<< " y "<<B <<" es: "<< (A*B)/(mul) << endl;
-
-
-           // else{
-               // cout << "Ingrese enteros positivos"<< endl;
-
+            else{
+                a=A; b=B;
+                while ((cont<=a) && (cont<=b)){
+                    if(a%cont==0){
+                         if(b%cont==0){
+                              if(cont>mul){ //mul=MCD
+                                  mul=cont;
+                              }
+                         }
+                    }
+                    cont+=1;
+                }
+                cout <<mul;
+                cout<<"El minimo comun multiplo de "<<A<< " y "<<B <<" es: "<< (A*B)/(mul) << endl;
+            }
             break;
 
         case 24:
@@ -339,49 +368,52 @@ int main()
 
         case 25:
             //Programa que pida un número N e imprima en pantalla la cantidad de dígitos de N
-            cout << "Ingrese un numero: "; cin >> N;
-            B=N;
-            if (N<0){
-                N*=-1;
+
+            cout << "Ingrese un numero: "; cin >> a;
+            if (a==0)  cout <<"0 tiene 1 digito" << endl;
+            else{
+                    B=a;
+                    if (a<0){
+                    a*=-1;
+                }
+                while(a>0){
+                    a=a/10;
+                    A++;
+                }
+                cout << B << " tiene "<< A << " digitos" << endl;
             }
-            while(N>0){
-                N=N/10;
-                A++;
-            }
-            cout << B << " tiene "<< A << " digitos" << endl;
             break;
 
         case 26:
             break;
 
         case 27:
-            // LONG
-
             //Calculadora con operaciones de suma,resta, multiplicación y división
             //ingresar los operandos y la operación a realizar.
-            cout<<"Ingrese un numero A: "; cin >> A;
-            cout<<"Ingrese un numero B: "; cin >>B;
+
+            cout<<"Ingrese un numero A: "; cin >> a;
+            cout<<"Ingrese un numero B: "; cin >>b;
             cout<<"Ingrese la operacion a realizar [ + , - , * , / ]:  "; cin >>C;
             cout << endl;
             switch (C) {
                 case '+':{
-                    cout<< A<< " + " << B<< " = " <<A+B<< endl;
+                    cout<< a<< " + " << b<< " = " <<a+b<< endl;
                     break;
                 }
                 case '-' :{
-                    cout<< A<< " - " << B<<  " = " <<A-B <<  endl;
+                    cout<< a<< " - " << b<<  " = " <<a-b <<  endl;
                     break;
                 }
                 case '*' :{
-                    cout<< A<< " * " << B<<  " = " <<A*B <<  endl;
+                    cout<< a<< " * " << b<<  " = " <<a*b <<  endl;
                     break;
                 }
                 case '/' :{
-                    if (B==0){
+                    if (b==0){
                         cout<<"No se realizan divisiones entre cero"<<  endl;
                     }
                     else{
-                        cout<< A<< " / " << B<<  " = " <<A/B <<  endl;
+                        cout<< a<< " / " << b<<  " = " <<a/b <<  endl;
                     }
                     break;
                 }
@@ -487,58 +519,39 @@ int main()
             break;
 
         case 5:
-            //TERMINAR
-
             //El tamaño del patrón estará determinado un número entero impar que ingrese el usuario
-            A=0; //b
-            B=0; //s
-            filas=0;
-            cout << "Ingrese un numero entero impar: ";
-            cin >> N;
+            //para la parte superior, diminuyen los espacios y aumentan los asteriscos
+            //comparten la ultima linea, se le resta en la parte inferior
+
+            cout << "Ingrese un numero entero impar: "; cin >> N;
             if (N%2==0){
             cout<< "Solo se admiten numeros enteros impares "<<endl;
             }
+
             else {
                 if (N>0){
-                    F=N; //k
-                    A=1;
-                    B=(N/2); //division entera
-                    cout<<B<<endl;
-                    filas=N;
 
-                    c=0;
-                    w=0;
-                    while(filas!=c){
-                        c=c+1;
-                        i=0;
-                        j=0;
-                        espacios=' '; //caracteres vacios?
-                        estrellas=' ';
-
-                        while(j!=B){
-                            espacios=espacios << ' ';
-                            j=j+1;
-
+                    for (int filas=1;filas>N;filas++){ //triangulo superior
+                        for (espacios=N/2;espacios>=filas;espacios--){
+                            cout<<" ";
                         }
-                        while(i!=A){
-                            estrellas=estrellas << '*';
-                            i=i+1;
+                        for (estrellas=1;2*filas-1>=estrellas;estrellas++){
+                            cout<<"*";
                         }
-
-                        cout << espacios << estrellas;
-
-                        if((B==0 && A==N) || (w==1)){
-                            B=B+1;
-                            A=A-2;
-                            w=1;
+                        cout<<endl;
+                    }
+                    for (int filas=1;filas-1>=N;filas++){ //triangulo inferior
+                        for (espacios=1;espacios<=filas;espacios++){
+                            cout<<" ";
                         }
-                        else{
-                                B=B-1;
-                                A=A+2;
+                        for (estrellas=2*filas-1;2*filas-1<estrellas;estrellas--){
+                            cout<<"*";
                         }
+                        cout<<endl;
                     }
                 }
             }
+
 
             break;
 
@@ -546,23 +559,20 @@ int main()
             break;
 
         case 7:
-            // LONG
-
             //Programa que reciba un número n y halle la suma de todos los números pares en la serie de Fibonacci menores a n.
-            //long unsigned int acumulador,acumulador_2,suma,c,N,a; //pq cuando inicializo sale error en los demas casos?
-            c=0; suma=0;acumulador=1;acumulador_2=1;
-            cout << "Ingrese un numero: "; cin >> N;
-            if (N>0){
-               while (c<N){
-                   a=acumulador+acumulador_2;
-                   acumulador=acumulador_2;
-                   acumulador_2 = a;
-                   if (a%2==0 && a<N){
-                         suma+=a;
+
+            cout << "Ingrese un numero: "; cin >> N1;
+            if (N1>0){
+               while (cont1<N1){
+                   z1=acum+acumulador_2;
+                   acum=acumulador_2;
+                   acumulador_2 = z1;
+                   if (z1%2==0 && z1<N1){
+                         s+=z1;
                    }
-                   c+=1;
+                   cont1+=1;
                }
-               cout << "El resultado de la suma es: "<< suma  <<endl;
+               cout << "El resultado de la suma es: "<< s <<endl;
             }
             else cout << "Ingrese un numero positivo"<< endl;
             break;
@@ -572,6 +582,7 @@ int main()
 
         case 9:
             //Programa que pida un número entero N e imprima el resultado de la suma de todos sus dígitos elevados a sí mismos.
+
             cout << "Ingrese un numero: "; cin >> N;
             if (N<0){
                 N*=-1;
@@ -580,10 +591,10 @@ int main()
                 A=N%10; //resto
                 N=N/10;
                 for(int i=1;i<=A;i++){
-                    contador=contador*A;
+                    cont=cont*A;
                 }
-                suma+=contador;
-                contador=1; //reinicio
+                suma+=cont;
+                cont=1; //reinicio
             }
             cout << "El resultado de la suma es : "<<suma<< endl;
             break;
@@ -592,25 +603,26 @@ int main()
             break;
 
         case 11:
-            //NEGATIVOS Y CERO
-
             //Programa que reciba un número y calcule el mínimo común múltiplo de todos los números enteros entre 1 y el número ingresado
-            cout << "Ingrese un numero: ";
-            cin >> N;
-            for (int i=1; band2; i++){
-                mul=N*i;
-                band=true;
-                 for (int j=N-1; band; j--){
-                     if(mul%j != 0){
-                         band=false;
+
+            cout << "Ingrese un numero: ";cin >> N;
+            if (N>0){
+                for (int i=1; band2; i++){
+                    mul=N*i;
+                    band=true;
+                     for (int j=N-1; band; j--){
+                         if(mul%j != 0){
+                             band=false;
+                         }
+                         if(j==1){
+                             band=false;
+                             band2=false;
+                         }
                      }
-                     if(j==1){
-                         band=false;
-                         band2=false;
-                     }
-                 }
+                }
+                cout<< "El minimo comun multiplo es: "<<mul<<endl;
             }
-            cout<< "El minimo comun multiplo es: "<<mul<<endl;
+            else cout << "Ingresar numeros positivos";
             break;
 
         case 12:
@@ -618,19 +630,20 @@ int main()
 
         case 13:
             //Programa que reciba un número y calcule la suma de todos los primos menores que el número ingresado
+
             cout << "Ingrese un numero: "; cin >> N;
             if (N>1){
                for(k=2;k<N;k++){
-                       while(contador!=k){
-                           contador+=1;
-                           if (k%contador==0){
+                       while(cont!=k){
+                           cont+=1;
+                           if (k%cont==0){
                                c+=1;
                            }
                        }
                        if (c==1){
                            sum+=k;
                        }
-                       contador=1;
+                       cont=1;
                        c=0;
                    }
             cout << "El resultado de la suma es: "<< sum <<endl;
@@ -642,50 +655,65 @@ int main()
             break;
 
         case 15:
-            //corregir restriccion y suma de las pendientes
+            //suma de las pendientes
 
             //Programa que reciba un número impar y calcule la suma de los números en la diagonal de una espiral de nxn
-            do{
-                cout << "Ingrese un numero impar mayor a cero: "; cin >> N;
-            }while((N<=0) && (N%2==0));
-            for (int f=0;f<N;f++){
-                for (int c=0;c<N;c++){
-                    if (f>c && f>=N-c-1){
-                        n0=2*(1+f)-N;
-                        cout<<n0*n0-2*(n0-1)-c+N-1-f << '\t';
-                    }
-                    else if (f<=c && f>N-c-1){
-                        n0=N-1-c;
-                        cout << (N-2*(1+n0))*(N-2*(1+n0))+1+f-(n0+1) << '\t';
-                    }
-                    else if(f<=c && f<=N-c-1){
-                        cout<<(N-2*f)*(N-2*f-1)+1+c-f << '\t';
-                    }
-                    else {
-                        cout<<(N-2*c)*(N-2*c-1)+1-f+c << '\t';
-                    }
-                }
-                cout << endl << endl << endl;
-        }
 
-        //suma=
-        cout<<"En una espiral de "<< N<<" x "<<N<<" la suma es: "<< suma;
+            cout << "Ingrese un numero impar mayor a cero: "; cin >> N;
+            cout <<endl;
+            if ((N>0) && (N%2!=0)){
+                for (int f=0;f<N;f++){
+                    for (int c=0;c<N;c++){
+                        if (f>c && f>=N-c-1){
+                            n0=2*(1+f)-N;
+                            cout<<n0*n0-2*(n0-1)-c+N-1-f << '\t';
+                        }
+                        else if (f<=c && f>N-c-1){
+                            n0=N-1-c;
+                            cout << (N-2*(1+n0))*(N-2*(1+n0))+1+f-(n0+1) << '\t';
+                        }
+                        else if(f<=c && f<=N-c-1){
+                            cout<<(N-2*f)*(N-2*f-1)+1+c-f << '\t';
+                        }
+                        else {
+                            cout<<(N-2*c)*(N-2*c-1)+1-f+c << '\t';
+                        }
+                    }
+                    cout << endl << endl << endl;
+            }
+
+            //suma=
+            cout<<"En una espiral de "<< N<<" x "<<N<<" la suma es: "<< suma<<endl;
+            }
+        else cout << "Solo se admite un numero impar mayor a cero "<<endl;
         break;
 
         case 16:
             break;
 
         case 17:
-            //TERMINAR
             //Programa que reciba un número N y calcule cual es el primer número triangular que tiene más de N divisores.
             cout << "Ingrese un numero: "; cin >> N;
-
-
-
-
-
-            cout<<"El numero es: "<< 28 <<"que tiene"<< 6 <<"divisores";
+            b=0;
+            if (N>0){
+                while(d<=N){
+                    cont=1;
+                    d=0; // reiniciar variables contador y d
+                    b++; //incrementar 1 a 1
+                    a=b*(b+1)/2; // enésimo número triangular
+                    //cout<<a<<endl;
+                    while(cont<=a){
+                        if (a%cont==0){
+                                d++; //suma si es divisor
+                        }
+                        cont++;
+                    }
+                }
+                cout<<"El numero es: "<< a <<" que tiene "<< d <<" divisores"<< endl;
+            }
+            else cout << "Ingrese un numero positivo"<< endl;
             break;
+
             }
     }
 
