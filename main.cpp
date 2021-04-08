@@ -13,6 +13,7 @@ int main()
     short int hora, hora_2, minuto, minuto_2, a1, a2, sumamin, sumahour;
     short n0;
     int n,a3,b3,c3,d3,e3,f3,g3,h3,i3,j3; // Para los billetes
+    int espacios, estrellas,filas,i,j;
     long int A,B,C1,N,F, horas, minutos, segundos, contador=1, contador2;
     long int letra,c=0;
     long int aleatorio, factorial;
@@ -22,7 +23,7 @@ int main()
     long long int acumuladorA, acumuladorB, mayor, auxiliar, acumulador2,acumulador=1;
     long long unsigned int cont1=0,acum=1, acumulador_2 = 1,s=0,z1,N1;
     long long int mul,sum,suma=0,cont=1,a,b,d,e,k;
-    char C, H, espacios, estrellas;
+    char C, H;
     int numerok=0 , numeroI=0;
 
     cout << "   |Ingrese 1 para ejercicios|"<< endl <<"   |2 para problemas| "<<endl << "   ----> ";
@@ -361,13 +362,17 @@ int main()
         case 23:
             //Programa que pida dos números A y B e imprima en pantalla el mínimo común múltiplo entre los dos
             //Si el producto de dos números lo dividimos por su máximo común divisor (MCD) dicho cociente es el mínimo común múltiplo.
-
+            mul=0;
             cout<<"Ingrese un numero A: "; cin >> A;
             cout<<"Ingrese un numero B: "; cin >>B;
+            a3=A; b3=B;
             if (A==0 || B==0){
                  cout<<"El minimo comun multiplo es el numero mas pequeno diferente de cero que es multiplo de los numeros" << endl;
             }
             else{
+                if (A<0) A=(-1)*A;
+                if (B<0) B=(-1)*B;
+
                 a=A; b=B;
                 while ((cont<=a) && (cont<=b)){
                     if(a%cont==0){
@@ -379,8 +384,8 @@ int main()
                     }
                     cont+=1;
                 }
-                cout <<mul;
-                cout<<"El minimo comun multiplo de "<<A<< " y "<<B <<" es: "<< (A*B)/(mul) << endl;
+
+                cout<<"El minimo comun multiplo de "<<a3<< " y "<<b3 <<" es: "<< (A*B)/(mul) << endl;
             }
             break;
 
@@ -419,7 +424,7 @@ int main()
 
         case 25:
             //Programa que pida un número N e imprima en pantalla la cantidad de dígitos de N
-
+            A=0;
             cout << "Ingrese un numero: "; cin >> a;
             if (a==0)  cout <<"0 tiene 1 digito" << endl;
             else{
@@ -737,37 +742,56 @@ int main()
         case 5:
             //El tamaño del patrón estará determinado un número entero impar que ingrese el usuario
             //para la parte superior, diminuyen los espacios y aumentan los asteriscos
-            //comparten la ultima linea, se le resta en la parte inferior
+                a3=0;
+                cout<< "Ingresar unicamente numeros enteros impares (positivos o negativos)  "<<endl;
+                cin >>N; //N= # de la fila llena
+                cout<<endl;
 
-            cout << "Ingrese un numero entero impar: "; cin >> N;
-            if (N%2==0){
-            cout<< "Solo se admiten numeros enteros impares "<<endl;
-            }
+                if (N%2!=0){
+                    estrellas=1;
+                    espacios=(N/2); //espacios en cada fila
+                    filas=N;
 
-            else {
-                if (N>0){
+                    if (N>0){ //valores positivos
+                        for (b3=0;filas!=b3;b3++){           //disminuira hasta que la fila sea igual a el contador
+                            for (j=0; j!=espacios;j++) cout << ' ';
+                            for (i=0;i!=estrellas;i++)  cout << '*';
+                            cout<<endl;
 
-                    for (int filas=1;filas>N;filas++){ //triangulo superior
-                        for (espacios=N/2;espacios>=filas;espacios--){
-                            cout<<" ";
+                            if((espacios==0) || (a3==1)){         //w= swiche
+                                espacios=espacios+1;                    // se activa cuando llegue a la fila principal
+                                estrellas=estrellas-2;                    //triangulo inf
+                                a3=1;
+                            }
+                            else{
+                                    espacios=espacios-1;               //triangulo sup
+                                    estrellas=estrellas+2;
+                            }
                         }
-                        for (estrellas=1;2*filas-1>=estrellas;estrellas++){
-                            cout<<"*";
-                        }
-                        cout<<endl;
+                    cout<<endl;
                     }
-                    for (int filas=1;filas-1>=N;filas++){ //triangulo inferior
-                        for (espacios=1;espacios<=filas;espacios++){
-                            cout<<" ";
-                        }
-                        for (estrellas=2*filas-1;2*filas-1<estrellas;estrellas--){
-                            cout<<"*";
-                        }
-                        cout<<endl;
-                    }
+                    else if (N<0){ //negativo, aqui pasa lo mismo simplemente que se usa el (-)
+                            for (b3=0;filas!=b3;b3--){
+                                for (j=0; j!=espacios;j--) cout << ' ';
+                                for (i=0;i!=estrellas;i++)  cout << '*';
+                                cout<<endl;
+
+                                if((espacios==0) || (a3==1)){
+                                    espacios=espacios-1;
+                                    estrellas=estrellas-2;
+                                    a3=1;
+                                }
+                                else{   espacios=espacios+1;
+                                        estrellas=estrellas+2;
+                                }
+                             }
+                          }
+
+                    else cout<<"Debia ingresar unicamente enteros positivos o enteros negativos"<<endl;
+                cout<<endl;
                 }
-            }
-            break;
+                else cout<<"Debia ingresar unicamente enteros positivos o enteros negativos"<<endl;
+                break;
 
         case 6:
             //Programa que aproxima el valor del numero euler.
@@ -940,7 +964,7 @@ int main()
 
         case 13:
             //Programa que reciba un número y calcule la suma de todos los primos menores que el número ingresado
-
+            sum=0;
             cout << "Ingrese un numero: "; cin >> N;
             if (N>1){
                for(k=2;k<N;k++){
@@ -1057,6 +1081,7 @@ int main()
         case 17:
             //Programa que reciba un número N y calcule cual es el primer número triangular que tiene más de N divisores.
             cout << "Ingrese un numero: "; cin >> N;
+            d=0;
             b=0;
             if (N>0){
                 while(d<=N){
@@ -1082,4 +1107,3 @@ int main()
     else cout << "El valor no es valido." << endl;
     return 0;
 }
-
